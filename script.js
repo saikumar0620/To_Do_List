@@ -21,7 +21,7 @@ let TODOS = [];
         renderTodos(TODOS);
         updateTaskCounts();
     }
-
+ 
 function loadTodos() {
     const todoArr = JSON.parse(localStorage.getItem("todos"));
     if (todoArr && todoArr.length) {
