@@ -1,26 +1,38 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <link rel="stylesheet" href="style.css">
-   <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
     <title>tasks</title>
 </head>
+
 <body>
     <div class="app_container">
         <h1>wel come</h1>
-        <form class="taskForm" >
-        
-            <!-- <label for="task">write your task</label> -->
+        <form class="taskForm">
             <input type="text" class="taskInput" placeholder="fill this task" required>
             <button class="addTaskButton" type="submit">submit</button>
-       </form>
-       <div class="tasksContainer"> 
+            <p id="taskError"></p>
 
-       </div>
+        </form>
+        <div class="tasksContainer">
+            <select id="sort">
+                <option value=" disabled selected">Sort By</option>
+                <option value="new">New First</option>
+                <option value="old">Olde irst</option>
+                <option value="pending">Incomplete top</option>
+            </select>
+            <button id="clearCompletedBtn">Clear Completed</button>
+
+            <div class="taskCounts">
+                <span id="totalCount">Total</span>
+                <span id="completedCount">Completed</span>
+            </div>
+
+        </div>
     </div>
 </body>
+
 </html>
-
-
-
