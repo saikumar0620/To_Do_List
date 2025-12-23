@@ -21,7 +21,7 @@ let TODOS = [];
         renderTodos(TODOS);
         updateTaskCounts();
     }
- 
+
 function loadTodos() {
     const todoArr = JSON.parse(localStorage.getItem("todos"));
     if (todoArr && todoArr.length) {
@@ -144,6 +144,39 @@ function updateTaskCounts() {
     completedCount.textContent = "Completed:" + completedTasks;
 }
 
+function formatTimestamp(isoString) {
+    const taskDate = new Date(isoString);
+    const now = new Date();
+
+    const isToday =
+        taskDate.toDateString() === now.toDateString();
+
+    const yesterday = new Date();
+    yesterday.setDate(now.getDate() - 1);
+
+    const isYesterday =
+        taskDate.toDateString() === yesterday.toDateString();
+
+    const time = taskDate.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    });
+
+    if (isToday) {
+        return `Today, ${time}`;
+    }
+
+    if (isYesterday) {
+        return `Yesterday, ${time}`;
+    }
+
+    return taskDate.toLocaleDateString() + ", " + time;
+}
+
+
+
+
 function createAndPushNewTask(task) {
     const newlistItem = document.createElement("li");
     newlistItem.setAttribute("class", "taskLiItem");
@@ -168,7 +201,10 @@ function createAndPushNewTask(task) {
     }
 
     const timeStamppTag = document.createElement("p");
-    timeStamppTag.textContent = new Date(task.timeStamp).toLocaleString();
+    // timeStamppTag.textContent = new Date(task.timeStamp).toLocaleString();
+    timeStamppTag.textContent = formatTimestamp(task.timeStamp);
+    timeStamppTag.textContent=formatTimestamp(task.timeStamp)
+
 
     tasksContentContainer.appendChild(tasksTextpTag);
     tasksContentContainer.appendChild(timeStamppTag);
@@ -215,7 +251,7 @@ taskFormInput.addEventListener("submit", function (event) {
         taskId: Date.now(),
         taskText: taskInput.value,
         isTaskDone: false,
-        timeStamp: new Date(),
+        timeStamp: new Date().toISOString()
     };
 
     taskInput.value = "";
